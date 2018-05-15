@@ -92,7 +92,9 @@
 		// 	_activateHooks();
 		// }
 
-		this.ds = hdocsDataSource;
+		hdocsDataSource.init("https://restapi.sop.hsl.test:8443", localStorage.access_token);
+		$scope.ds = hdocsDataSource;
+		//this.ds = hdocsDataSource;
 	}
 
 	angular.module("noinfopath-biz-forms")

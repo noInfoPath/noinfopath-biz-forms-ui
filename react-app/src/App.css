@@ -1,0 +1,72 @@
+.App {
+	display: flex;
+	flex-direction: column;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+
+.App-logo {
+	animation: App-logo-spin infinite 3s linear;
+	height: 2em;
+	margin-top: 1em;
+}
+
+
+
+.App-title {
+	font-size: 1.5em;
+}
+
+header {
+	background-color: #222;
+	height: 3em;
+	padding: 0;
+	color: white;
+}
+
+content {
+	display: flex;
+	flex: 1 auto;
+	position: relative;
+}
+
+
+footer {
+	background-color: #222;
+	height: 1em;
+	padding: .5em;
+	color: white;
+	display: flex;
+	justify-content: center;
+	font-size: .5em;
+}
+
+@keyframes App-logo-spin {
+	0% {
+		-webkit-transform: rotate3d(0, 1, 0, 0deg);
+		-ms-transform: rotate3d(0, 1, 0, 0deg);
+		-o-transform: rotate3d(0, 1, 0, 0deg);
+		transform: rotate3d(0, 1, 0, 0deg);
+	}
+	50% {
+		-webkit-transform: rotate3d(0, 1, 0, 180deg);
+		-ms-transform: rotate3d(0, 1, 0, 180deg);
+		-o-transform: rotate3d(0, 1, 0, 180deg);
+		transform: rotate3d(0, 1, 0, 180deg);
+	}
+	100% {
+		-webkit-transform: rotate3d(0, 1, 0, 360deg);
+		-ms-transform: rotate3d(0, 1, 0, 360deg);
+		-o-transform: rotate3d(0, 1, 0, 360deg);
+		transform: rotate3d(0, 1, 0, 360deg);
+	}
+}
+
+.doc-lib-drawer {
+	top: 64px !important;
+	bottom: 2px !important;
+	height: auto !important;
+}

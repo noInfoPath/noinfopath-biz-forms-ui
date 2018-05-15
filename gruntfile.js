@@ -43,13 +43,21 @@ module.exports = function (grunt) {
 			}
 		},
 		concat: {
+			hslSop: {
+				src: ["test/mocks/consumer-app/app/hsl/*.*"],
+				dest: "junk/build/hsl-sop-forms.js"
+			},
 			hdocs: {
 				src: [
+					"node_modules/path-browserify/index.js",
+					"src/global.js",
+					"node_modules/whatwg-fetch/fetch.js",
+					"node_modules/noinfopath-to-title-case/to-title-case.js",
 					"src/js/module.js",
 					"src/js/hdoc.controller.js",
 					"src/js/data.service.js",
 					"src/js/medium.service.js",
-					"src/js/directives.js"
+					"src/js/directives/*.js"
 				],
 				dest: "junk/build/noinfopath-biz-forms.js"
 			},
@@ -123,6 +131,29 @@ module.exports = function (grunt) {
 					"git push"
 				].join(" && ")
 			}
+		},
+		browserify: {
+			hdocs: {
+				src: [
+					"src/js/hdocs/index.js"
+					// "node_modules/path-browserify/index.js",
+					// "src/global.js",
+					// "node_modules/whatwg-fetch/fetch.js",
+					// "node_modules/noinfopath-to-title-case/to-title-case.js",
+					// "src/js/module.js",
+					// "src/js/hdoc.controller.js",
+					// "src/js/data.service.js",
+					// "src/js/medium.service.js",
+					// "src/js/directives/*.js"
+				],
+				dest: "junk/build/noinfopath-biz-forms.js",
+				options: {
+					alias: {
+						"global": "./src/js/hdocs/global.js"
+					}
+				}
+			}
+
 		}
 	});
 
@@ -133,7 +164,7 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks("grunt-contrib-watch");
 	grunt.loadNpmTasks("grunt-shell");
 	grunt.loadNpmTasks("grunt-contrib-copy");
-	grunt.loadNpmTasks("@noinfopath/grunt-noinfopath-config");
+	grunt.loadNpmTasks('grunt-browserify');
 
 	//Default task(s).
 

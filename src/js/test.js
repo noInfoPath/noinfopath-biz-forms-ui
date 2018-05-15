@@ -9,6 +9,16 @@
 				hdocsDataSource.getLibraryDirectory()
 					.then(console.log.bind(console))
 			}
+
+			this.getNewHdoc = function () {
+				hdocsDataSource.getNewHdoc({
+						serviceId: 356,
+						templateId: 3
+					})
+					.then(function (resp) {
+						return resp.data;
+					})
+			}
 		}]);
 
 })(angular);

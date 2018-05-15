@@ -35,7 +35,7 @@
 				controllerAs: 'vm'
 			})
 			.state('hdocs', {
-				url: '/hdocs',
+				url: '/hdocs/:sid',
 				controller: 'hdocsController',
 				templateUrl: 'app/hdocs/index.html',
 				controllerAs: 'hdocs'
