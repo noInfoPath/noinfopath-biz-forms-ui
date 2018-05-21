@@ -1,21 +1,39 @@
-import React, {Component} from "react";
-import AppBar from 'material-ui/AppBar';
-import DocumentLibrary from "./components/document-libarary";
+/*React Components*/
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { withRouter } from 'react-router'
+
+/* Demo Components*/
+import AppBar from './components/app-bar';
+
+
+
+/*App Components & Assets*/
 import logo from "./images/nip-logo.svg";
 import "./App.css";
 
-class App extends Component {
+class AppComponent extends Component {
 	componentDidMount() {
 		console.log("App::componentDidMount", this);
 	}
 
 	render() {
 		return (<div className="App">
-			<AppBar title="Editable Form Demo" iconClassNameRight="muidocs-icon-navigation-expand-more">
-				<img className="App-logo" src={logo} alt="foo"/>
-			</AppBar>
-			<DocumentLibrary/></div>);
+			<AppBar logo={logo}/>
+			<div>{this.props.children}</div>
+		</div>);
 	}
 }
 
-export default App;
+const mapStateToProps = (state) => {
+	return Object.assign({}, state);
+};
+
+const mapDispatchToProps = dispatch => ({});
+
+const App = connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(AppComponent);
+
+export default withRouter(App);

@@ -1,6 +1,7 @@
 import { connect } from "react-redux";
 import { selectDocument } from "../actions/menu-item";
 import MenuItem from "../components/menu-item";
+import { withRouter } from 'react-router'
 
 
 const mapStateToProps = (state) => {
@@ -20,4 +21,4 @@ const LibraryMenuItem = connect(
 	mapDispatchToProps
 )(MenuItem);
 
-export default LibraryMenuItem;
+export default withRouter(LibraryMenuItem);

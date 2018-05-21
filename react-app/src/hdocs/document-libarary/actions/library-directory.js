@@ -21,6 +21,6 @@ export function fetchLibrarySuccess(libraryDirectory) {
 export function fetchLibraryError(err) {
 	return {
 		type: FETCH_LIBRARY_ERROR,
-		err
+		libraryDirectoryError: err.response
 	}
 }

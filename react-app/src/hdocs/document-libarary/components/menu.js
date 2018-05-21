@@ -1,23 +1,22 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { withRouter } from 'react-router'
+
 import LibraryMenuItem from "../containers/library-menu-item";
 import { List, ListItem } from "material-ui/List";
-import Subheader from 'material-ui/Subheader';
-import Divider from 'material-ui/Divider';
-import Toggle from 'material-ui/Toggle';
+import CircularProgress from 'material-ui/CircularProgress';
 
-class Menu extends Component {
-	constructor(props) {
-		super(props);
-	}
+class MenuComponent extends Component {
 
 	componentDidMount() {
 		this.props.fetchLibrary();
 	}
 
 	render() {
-		return (
-			<List>
+
+		if (this.props.libraryDirectory) {
+			return (
+				<List>
 				{Object
 					.keys(this.props.libraryDirectory)
 					.map(key => {
@@ -32,9 +31,21 @@ class Menu extends Component {
 							nestedItems={group.map(item => <LibraryMenuItem key={item.id} {...item}/>)} />)
 					})}
 			</List>
-		)
-
+			)
+		} else {
+			return (<div ><CircularProgress/></div>)
+		}
 	}
 }
+const mapStateToProps = (state) => {
+	return Object.assign({}, state);
+};
 
-export default Menu;
+const mapDispatchToProps = dispatch => ({});
+
+const Menu = connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(MenuComponent);
+
+export default withRouter(Menu);

@@ -1,11 +1,13 @@
 import { combineReducers } from 'redux';
 import { combineEpics } from 'redux-observable';
 
-import * as documentLibraryReducers from "./components/document-libarary/reducers";
-import { fetchLibraryDirectoryEpic } from "./components/document-libarary/epics";
+import * as documentLibraryReducers from "./hdocs/document-libarary/reducers";
+
+import { fetchLibraryDirectoryEpic } from "./hdocs/document-libarary/epics";
+import { routerReducer } from 'react-router-redux'
 
 
-export const rootReducer = combineReducers(documentLibraryReducers);
+export const rootReducer = combineReducers({ documentLibraryReducers, routing: routerReducer });
 
 export const rootEpic = combineEpics(
 	fetchLibraryDirectoryEpic

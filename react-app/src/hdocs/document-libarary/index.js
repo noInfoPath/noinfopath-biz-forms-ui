@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import AppBar from "material-ui/AppBar";
 import Drawer from "material-ui/Drawer";
 import LibraryMenu from "./containers/library-menu";
 import Subheader from 'material-ui/Subheader';

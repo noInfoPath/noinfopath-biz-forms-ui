@@ -11,7 +11,7 @@
 .App-logo {
 	animation: App-logo-spin infinite 3s linear;
 	height: 2em;
-	margin-top: 1em;
+	/* margin-top: 1em; */
 }
 
 
@@ -69,4 +69,18 @@ footer {
 	top: 64px !important;
 	bottom: 2px !important;
 	height: auto !important;
+}
+
+.demo-app-bar {
+	align-items: center;
+}
+
+.demo-app-bar div {
+	margin-top: 0 !important;
+}
+
+.home {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
 }

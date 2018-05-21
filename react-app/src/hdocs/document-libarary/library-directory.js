@@ -12,7 +12,7 @@ const libraryDirectory = function (state = [], action) {
 	case FETCH_LIBRARY_SUCCESS:
 		return action.libraryDirectory;
 	case FETCH_LIBRARY_ERROR:
-		return action.err;
+		return action.libraryDirectoryError;
 	default:
 		return state;
 	}

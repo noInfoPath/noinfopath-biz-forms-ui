@@ -1,16 +1,10 @@
 import {
-	FETCH_LIBRARY,
 	FETCH_LIBRARY_SUCCESS,
 	FETCH_LIBRARY_ERROR
 } from "../type-defs";
 
-import {
-	fetchLibrarySuccess,
-	fetchLibraryError
-} from "../actions/library-directory";
-
-
-export default function reducer(state = [], action) {
+export default function reducer(state = {}, action) {
+	console.log("action", action);
 	switch (action.type) {
 	case FETCH_LIBRARY_SUCCESS:
 		var grouped = {};
@@ -22,7 +16,7 @@ export default function reducer(state = [], action) {
 		});
 		return grouped;
 	case FETCH_LIBRARY_ERROR:
-		return action.err;
+		return action.libraryDirectoryError;
 	default:
 		return state;
 	}
