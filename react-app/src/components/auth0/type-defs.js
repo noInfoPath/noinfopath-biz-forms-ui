@@ -1,4 +1,0 @@
-export const AUTH0_INIT = "AUTH0_INIT";
-export const AUTH0_LOGIN = "AUTH0_LOGIN";
-export const AUTH0_LOGIN_SUCCESS = "AUTH0_LOGIN_SUCCESS";
-export const AUTH0_LOGIN_ERROR = "AUTH0_LOGIN_ERROR";

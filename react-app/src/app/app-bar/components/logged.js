@@ -9,11 +9,16 @@ import IconMenu from "material-ui/IconMenu";
 import MenuItem from "material-ui/MenuItem";
 import MoreVertIcon from "material-ui/svg-icons/navigation/more-vert";
 
+import { auth0Logout } from "../../../auth0"
 
 class LoggedComponent extends Component {
+	handleSignOutClick = () => {
+		this.props.auth0Logout();
+	}
+
 	render() {
 		return (<IconMenu
-			{...this.props}
+			
 			iconButtonElement={
 				<IconButton><MoreVertIcon /></IconButton>
 			}
@@ -22,20 +27,14 @@ class LoggedComponent extends Component {
 		>
 			<MenuItem primaryText="Refresh" />
 			<MenuItem primaryText="Help" />
-			<MenuItem primaryText="Sign out" />
+			<MenuItem primaryText="Sign out" onClick={this.handleSignOutClick}/>
 		</IconMenu>)
 	}
 }
 
-const mapStateToProps = (state) => {
-	return Object.assign({}, state);
-};
-
-const mapDispatchToProps = dispatch => ({});
 
 const Logged = connect(
-	mapStateToProps,
-	mapDispatchToProps
+	null, { auth0Logout }
 )(LoggedComponent);
 
 export default withRouter(Logged);

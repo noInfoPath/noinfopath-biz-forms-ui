@@ -1,8 +1,7 @@
 /*React Components*/
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { browserHistory, withRouter } from "react-router";
-
+import { Route, Link } from "react-router-dom"
 
 /* MaterialUI Components*/
 import MuiAppBar from 'material-ui/AppBar';
@@ -16,28 +15,20 @@ import { LoginReducer, userLoginEpic } from "./components/login";
 
 export { LoginReducer, userLoginEpic };
 
-class Logo extends Component {
-	handleClick = () => browserHistory.push("/");
-	render() {
-		return (<FlatButton onClick={this.handleClick}><img className="App-logo" src={this.props.src} alt="foo"/></FlatButton>);
-	}
-}
-
 class DemoAppBar extends Component {
 	render() {
-			console.log(this);
 			return (<MuiAppBar
 			className="demo-app-bar"
 			title="Editable Form Demo"
-			iconElementLeft={<Logo src={this.props.logo}></Logo>}
-			iconElementRight={ this.props.logged ? <Logged></Logged> : <LoginButton></LoginButton> }
+			iconElementLeft={<Link to="/"><FlatButton onClick={this.handleClick}><img className="App-logo" src={this.props.logo} alt="Editable For Demo"/></FlatButton></Link>}
+			iconElementRight={ this.props.auth0.loggedIn ? <Logged></Logged> : <LoginButton></LoginButton> }
 		/>)
 	}
 }
 
 
 const mapStateToProps = (state) => {
-	console.log("AppBar::mapStateToProps", state);
+	//console.log("AppBar::mapStateToProps", state.auth.login);
 	return Object.assign({}, state);
 };
 
@@ -48,4 +39,4 @@ const AppBar = connect(
 	mapDispatchToProps
 )(DemoAppBar);
 
-export default withRouter(AppBar);
+export default AppBar;

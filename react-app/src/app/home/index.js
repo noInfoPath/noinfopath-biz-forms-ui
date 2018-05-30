@@ -1,24 +1,24 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { withRouter } from 'react-router'
-
-import { browserHistory } from "react-router";
+import { Link, withRouter } from 'react-router-dom'
 import RaisedButton from 'material-ui/RaisedButton';
-import logo from "../images/nip-logo.svg";
-
+import logo from "../../images/nip-logo.svg";
 
 class HomeComponent extends Component {
 	componentDidMount() {
-		console.log("HomeComponent::componentDidMount", this);
+		console.log("[HomeComponent::componentDidMount]", this.props);
+
 	}
 
-	handleClick = event => browserHistory.push("/hdocs");
-
+	// handleClick() {
+	// 	console.log("Get Started");
+	// }
+	//
 	render() {
 		return (<div className="home">
 				<h1>Content Editable Forms Demo</h1>
 				<div><img src={logo} alt="NoInfoPath" /></div>
-				<RaisedButton label="Get Started Now" onClick={this.handleClick}></RaisedButton>
+				<Link to="/hdocs"><RaisedButton label="Get Started Now"></RaisedButton></Link>
 		</div>);
 
 	}

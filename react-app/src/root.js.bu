@@ -1,0 +1,27 @@
+import { combineReducers } from "redux";
+import { combineEpics } from "redux-observable";
+
+import * as documentLibraryReducers from "./hdocs/document-libarary/reducers";
+
+import { fetchLibraryDirectoryEpic } from "./hdocs/document-libarary/epics";
+
+import { auth0Reducers } from "./components/auth";
+import { auth0AuthenticateEpic, auth0LoginEpic } from "./components/auth";
+
+function indexReducer(state, action) {
+	return state
+}
+
+
+
+export const rootReducer = combineReducers({
+	documentLibraryReducers,
+	//routing: routerStateReducer,
+	auth: auth0Reducers
+});
+
+export const rootEpic = combineEpics(
+	fetchLibraryDirectoryEpic,
+	auth0AuthenticateEpic,
+	auth0LoginEpic
+);
