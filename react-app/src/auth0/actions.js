@@ -1,12 +1,11 @@
-import Auth0 from "auth0-js";
-
-export const AUTH0_INIT = "AUTH0_INIT"; //DELETE
-export const AUTH0_LOGIN = "AUTH0_LOGIN"; //DELETE
-export const AUTH0_CALLBACK = "AUTH0_CALLBACK";
-export const AUTH0_LOGIN_ERROR = "AUTH0_LOGIN_ERROR";
-export const AUTH0_AUTHENTICATED = "AUTH0_AUTHENTICATED";
+export const AUTH0_INIT = "AUTH0_INIT";
 export const AUTH0_AUTHORIZE = "AUTH0_AUTHORIZE";
+export const AUTH0_CALLBACK = "AUTH0_CALLBACK";
+export const AUTH0_ERROR = "AUTH0_ERROR";
 export const AUTH0_LOGOUT = "AUTH0_LOGOUT";
+
+export const AUTH0_AUTHENTICATED = "AUTH0_AUTHENTICATED"; //DELETE
+export const AUTH0_LOGIN = "AUTH0_LOGIN"; //DELETE
 export const AUTH0_NOOP = "AUTH0_NOOP";
 
 function checkAuthenticationStatus(accessToken, expires) {
@@ -15,6 +14,15 @@ function checkAuthenticationStatus(accessToken, expires) {
 		isAuthenticated = !!accessToken && !expired;
 
 	return isAuthenticated;
+}
+
+
+function getSession() {
+	return JSON.parse(localStorage.getItem("auth") || "{}");
+}
+
+function deleteSession() {
+	localStorage.removeItem("auth");
 }
 
 function setSession(authResult) {
@@ -34,16 +42,15 @@ function setSession(authResult) {
 
 }
 
-function getSession() {
-	return JSON.parse(localStorage.getItem("auth") || "{}");
-}
-
 export function auth0Init(auth0Config) {
+	const session = getSession();
+
 	return {
 		type: AUTH0_INIT,
-		loggedIn: false,
+		loggedIn: !!session.accessToken,
 		inProgress: false,
-		auth0Config
+		auth0Config,
+		session
 	}
 }
 
@@ -76,6 +83,8 @@ export function authorize(auth0Config, redirectUri) {
 }
 
 export function auth0Logout() {
+	deleteSession();
+
 	return {
 		type: AUTH0_LOGOUT,
 		loggedIn: false,
@@ -83,11 +92,14 @@ export function auth0Logout() {
 	}
 }
 
-export function authAuthenticated() {
+export function auth0Authenticated(authResult, returnPath) {
+	setSession(authResult);
+
 	return {
 		type: AUTH0_AUTHENTICATED,
 		loggedIn: true,
-		inProgress: false
+		inProgress: false,
+		returnPath: returnPath
 	}
 }
 
@@ -100,49 +112,26 @@ export function authLogin() {
 }
 
 
-export function auth0Callback(auth0Config) {
+export function auth0Callback(auth0Config, returnPath) {
 	const action = {
-			type: AUTH0_CALLBACK,
-			loggedIn: false,
-			inProgress: false
-		},
-		auth0 = new Auth0.WebAuth({
-			domain: auth0Config.domain,
-			clientID: auth0Config.clientId,
-			redirectUri: auth0Config.callbackUrl, //+ (state.redirectUri ? "?returnPath=" + state.auth0.redirectUri : ""),
-			audience: auth0Config.audience,
-			responseType: auth0Config.responseType,
-			scope: auth0Config.scope
-		});
+		type: AUTH0_CALLBACK,
+		auth0Config,
+		returnPath,
+		loggedIn: false,
+		inProgress: false
+	};
 
-	//BUG: May need to manage state token manually
-
-	auth0.parseHash((err, authResult) => {
-
-		action.loggedIn = !!authResult;
-
-		if (authResult && authResult.accessToken && authResult.idToken) {
-			setSession(authResult);
-			action.authResult = authResult;
-			action.loggedIn = true;
-			action.inProgress = false;
-		} else if (err) {
-			// console.error(err.errorDescription);
-			action.loggedIn = false;
-			action.inProgress = false;
-			action.err = err;
-		}
-	});
-
+	console.log(action);
 	return action;
 }
 
-export function authLoginError(err) {
+export function auth0Error(err) {
 	return {
-		type: AUTH0_LOGIN_ERROR,
-		err,
+		type: AUTH0_ERROR,
+		error: err,
 		loggedIn: false,
-		inProgress: false
+		inProgress: false,
+		session: {}
 	}
 }
 

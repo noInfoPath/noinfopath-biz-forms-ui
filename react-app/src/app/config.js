@@ -4,7 +4,8 @@ export const AUTH_CONFIG = {
 	callbackUrl: "http://localhost:3000",
 	audience: "https://restapi.sop.heavensentlegal.com",
 	responseType: "token id_token",
-	scope: "openid profile"
+	scope: "openid profile",
+	errorPath: "/error"
 }
 
 export const HDOCS_CONFIG = {

@@ -5,15 +5,6 @@ import RaisedButton from 'material-ui/RaisedButton';
 import logo from "../../images/nip-logo.svg";
 
 class HomeComponent extends Component {
-	componentDidMount() {
-		console.log("[HomeComponent::componentDidMount]", this.props);
-
-	}
-
-	// handleClick() {
-	// 	console.log("Get Started");
-	// }
-	//
 	render() {
 		return (<div className="home">
 				<h1>Content Editable Forms Demo</h1>

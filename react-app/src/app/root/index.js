@@ -1,24 +1,23 @@
 /*React Components*/
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { withRouter } from "react-router-dom"
+import { withRouter, Redirect } from "react-router-dom"
 
 /* Demo Components*/
 import AppBar from "../app-bar";
 
 
-
 class RootComponent extends Component {
-	componentWillMount() {
-		console.log("App::componentWillMount", this);
-	}
 
 	render() {
+		const style = {
+			position: "relative"
+		}
+
 		return (
 			<div>
 				<AppBar logo={this.props.logo}/>
-				<div>{this.props.children}</div>
-			</div>
+				<div style={style}>{this.props.children}</div> </div>
 		);
 	}
 }

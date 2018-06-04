@@ -1,7 +1,7 @@
 /*React Components*/
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Route, Link } from "react-router-dom"
+import { Link, withRouter } from "react-router-dom"
 
 /* MaterialUI Components*/
 import MuiAppBar from 'material-ui/AppBar';
@@ -39,4 +39,4 @@ const AppBar = connect(
 	mapDispatchToProps
 )(DemoAppBar);
 
-export default AppBar;
+export default withRouter(AppBar);

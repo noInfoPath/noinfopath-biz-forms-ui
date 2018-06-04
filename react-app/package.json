@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "auth0-js": "^9.5.1",
+    "auth0-js": "^9.6.0",
     "material-ui": "^0.20.1",
     "md5": "^2.2.1",
     "normalizr": "^3.2.4",

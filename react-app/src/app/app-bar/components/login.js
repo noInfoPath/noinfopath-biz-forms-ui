@@ -1,42 +1,39 @@
 /*React Components*/
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { withRouter } from "react-router";
 
 /* MaterialUI Components*/
 import FlatButton from "material-ui/FlatButton";
 
 /* Auth0 */
+import { authorize } from "../../../auth0/actions";
 
 
 const mapStateToProps = (state) => {
-	return Object.assign({}, state);
+
+	return {
+		auth0Config: state.auth0.auth0Config
+	}
 };
 
-const mapDispatchToProps = dispatch => ({
-	onLoginClicked: () => {
-		/*
-		 * FIXME:  There is no actual login page because Auto0 Lock is used.
-		 */
-		dispatch({ type: "FOO" });
-	}
-});
 
 class Login extends Component {
 	handleClick = () => {
-		this.props.onLoginClicked();
+
+		this.props.authorize(this.props.auth0Config, this.props.location.pathname);
 	}
 
 	render() {
-		console.log("[Login:render]", this.props);
+
 		return (
 			<FlatButton label="Login" onClick={this.handleClick}/>
 		);
 	}
 }
 
-const LoginButton = connect(
-	mapStateToProps,
-	mapDispatchToProps
-)(Login);
+const LoginButton = withRouter(connect(
+	mapStateToProps, { authorize }
+)(Login));
 
 export default LoginButton;
